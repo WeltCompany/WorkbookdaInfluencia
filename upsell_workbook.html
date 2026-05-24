@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workbook da Influência — Complemento Oficial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#070C12;
+  --ink-mid:#0D1825;
+  --ink-lift:#132236;
+  --ink-card:#1A2D42;
+  --gold:#C9A84C;
+  --gold-lt:#E8CC7A;
+  --gold-dk:#8A6B28;
+  --red:#E94560;
+  --cream:#F0EAD8;
+  --cream-dk:#C8BC9A;
+  --silver:#6E8090;
+  --white:#FFFFFF;
+  --green:#2ECC71;
+  --r:16px;
+  --r-sm:8px;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--cream);overflow-x:hidden;line-height:1.6}
+
+/* ── TOP CONFIRM BAR ── */
+.confirm-bar{
+  background:linear-gradient(90deg,#0D3B1E,#1A6B35,#0D3B1E);
+  padding:14px 24px;
+  text-align:center;
+  border-bottom:1px solid rgba(46,204,113,.3);
+}
+.confirm-bar-inner{
+  display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+}
+.confirm-icon{font-size:20px}
+.confirm-text{
+  font-family:'Cinzel',serif;font-size:13px;font-weight:600;
+  color:#2ECC71;letter-spacing:1px;
+}
+
+/* ── TRANSITION HERO ── */
+.transition-hero{
+  background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(201,168,76,.07) 0%,transparent 70%),
+    linear-gradient(180deg,var(--ink-mid) 0%,var(--ink) 100%);
+  padding:80px 24px 60px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.transition-hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='.8' fill='%23C9A84C' fill-opacity='.1'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.congrats-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.3);
+  color:#2ECC71;padding:10px 24px;border-radius:100px;
+  font-size:13px;font-weight:600;letter-spacing:1px;
+  margin-bottom:40px;animation:fadeUp .6s ease both;
+}
+.transition-hero h1{
+  font-family:'Cinzel',serif;font-size:clamp(22px,3.5vw,38px);
+  font-weight:700;color:var(--cream-dk);line-height:1.4;
+  max-width:680px;margin:0 auto 32px;
+  animation:fadeUp .7s ease .1s both;
+}
+.question-block{
+  max-width:700px;margin:0 auto;
+  padding:40px;
+  background:rgba(201,168,76,.05);
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:var(--r);
+  animation:fadeUp .7s ease .2s both;
+  position:relative;
+}
+.question-block::before{
+  content:'\201C';position:absolute;top:-18px;left:36px;
+  font-family:'Cormorant Garamond',serif;font-size:90px;
+  color:var(--gold);opacity:.25;line-height:1;
+}
+.question-block p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(22px,3vw,30px);
+  font-style:italic;color:var(--cream);
+  line-height:1.55;
+}
+
+/* ── PROBLEM SECTION ── */
+.problem-section{
+  background:var(--ink-mid);
+  padding:80px 24px;
+  text-align:center;
+}
+.problem-inner{max-width:680px;margin:0 auto}
+.section-label{
+  font-size:11px;font-weight:700;letter-spacing:4px;
+  text-transform:uppercase;color:var(--gold);margin-bottom:20px;
+}
+.section-title{
+  font-family:'Cinzel',serif;font-size:clamp(26px,4vw,44px);
+  font-weight:700;color:var(--white);line-height:1.15;margin-bottom:28px;
+}
+.section-title .red{color:var(--red)}
+.section-title .gold{color:var(--gold)}
+.problem-text{
+  font-size:18px;line-height:1.85;color:var(--cream-dk);
+  margin-bottom:20px;
+}
+.problem-text strong{color:var(--cream)}
+.truth-box{
+  background:rgba(233,69,96,.06);
+  border:1px solid rgba(233,69,96,.2);
+  border-left:3px solid var(--red);
+  border-radius:0 var(--r) var(--r) 0;
+  padding:24px 28px;margin:32px 0;text-align:left;
+}
+.truth-box p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-style:italic;
+  color:var(--cream);line-height:1.6;
+}
+
+/* ── SOLUTION INTRO ── */
+.solution-intro{
+  padding:80px 24px;text-align:center;
+  background:var(--ink);
+}
+.solution-inner{max-width:760px;margin:0 auto}
+.workbook-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(36px,6vw,70px);
+  font-weight:900;color:var(--white);
+  line-height:.95;margin-bottom:8px;
+}
+.workbook-subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(18px,2.5vw,26px);
+  font-style:italic;color:var(--gold-lt);
+  margin-bottom:36px;
+}
+.solution-desc{
+  font-size:17px;line-height:1.85;color:var(--cream-dk);
+  max-width:620px;margin:0 auto 48px;
+}
+.gold-rule{width:56px;height:3px;background:var(--gold);border-radius:2px;margin:0 auto 40px}
+
+/* ── FEATURES GRID ── */
+.features-section{
+  background:var(--ink-mid);padding:80px 24px;
+}
+.features-inner{max-width:900px;margin:0 auto}
+.features-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;margin-top:48px;
+}
+.feature-card{
+  background:var(--ink);
+  border:1px solid rgba(201,168,76,.12);
+  border-top:3px solid var(--gold);
+  border-radius:0 0 var(--r) var(--r);
+  padding:32px 24px;
+  transition:border-color .3s,transform .3s;
+}
+.feature-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-4px)}
+.feature-icon{font-size:32px;margin-bottom:16px}
+.feature-tag{
+  font-size:10px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--gold);margin-bottom:10px;
+}
+.feature-title{
+  font-family:'Cinzel',serif;font-size:16px;font-weight:600;
+  color:var(--white);margin-bottom:12px;line-height:1.3;
+}
+.feature-desc{font-size:14px;color:var(--silver);line-height:1.7}
+
+/* ── WHAT'S INSIDE ── */
+.inside-section{padding:80px 24px;text-align:center}
+.inside-inner{max-width:900px;margin:0 auto}
+.modules-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;margin-top:48px;
+}
+.module-card{
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(201,168,76,.1);
+  border-radius:var(--r-sm);padding:20px 16px;text-align:left;
+  transition:background .3s;
+}
+.module-card:hover{background:rgba(201,168,76,.04)}
+.module-part{
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  color:var(--gold);margin-bottom:6px;text-transform:uppercase;
+}
+.module-name{font-family:'Cinzel',serif;font-size:14px;font-weight:600;color:var(--white);margin-bottom:8px}
+.module-items{list-style:none}
+.module-items li{
+  font-size:12px;color:var(--silver);padding:3px 0;
+  border-bottom:1px solid rgba(255,255,255,.03);
+  display:flex;gap:6px;align-items:flex-start;
+}
+.module-items li:last-child{border-bottom:none}
+.mod-dot{color:var(--gold);font-size:10px;flex-shrink:0;margin-top:3px}
+
+/* ── 30 DAYS PLAN ── */
+.plan-section{
+  background:var(--ink-mid);padding:80px 24px;
+}
+.plan-inner{max-width:800px;margin:0 auto;text-align:center}
+.plan-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:16px;margin-top:48px;
+}
+.plan-week{
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(201,168,76,.1);
+  border-radius:var(--r);padding:24px 20px;text-align:left;
+}
+.week-label{
+  font-family:'Cinzel',serif;font-size:11px;font-weight:700;
+  color:var(--gold);letter-spacing:2px;margin-bottom:12px;
+}
+.week-title{font-size:15px;font-weight:600;color:var(--white);margin-bottom:8px}
+.week-desc{font-size:13px;color:var(--silver);line-height:1.6}
+
+/* ── QUOTE ── */
+.quote-section{padding:64px 24px;text-align:center}
+.big-quote{
+  max-width:640px;margin:0 auto;
+  padding:44px 40px;
+  background:rgba(201,168,76,.05);
+  border:1px solid rgba(201,168,76,.18);
+  border-radius:var(--r);position:relative;
+}
+.big-quote::before{
+  content:'\201C';position:absolute;top:-18px;left:32px;
+  font-family:'Cormorant Garamond',serif;font-size:90px;
+  color:var(--gold);opacity:.25;line-height:1;
+}
+.big-quote blockquote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(19px,2.5vw,26px);
+  font-style:italic;color:var(--cream);
+  line-height:1.6;margin-bottom:20px;
+}
+.big-quote cite{
+  font-family:'Cinzel',serif;font-size:11px;font-weight:600;
+  color:var(--gold);letter-spacing:2px;text-transform:uppercase;
+}
+
+/* ── VALUE STACK ── */
+.value-section{padding:80px 24px;text-align:center;background:var(--ink)}
+.value-inner{max-width:600px;margin:0 auto}
+.value-stack{
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(201,168,76,.15);
+  border-radius:var(--r);padding:36px;margin-top:48px;
+}
+.value-row{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);
+}
+.value-row:last-child{border-bottom:none}
+.val-bullet{
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(201,168,76,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;margin-top:2px;
+}
+.val-name{font-size:15px;font-weight:600;color:var(--white);margin-bottom:3px}
+.val-desc{font-size:13px;color:var(--silver);line-height:1.5}
+.val-price{
+  font-family:'Cinzel',serif;font-size:13px;font-weight:700;
+  color:var(--gold);white-space:nowrap;margin-left:auto;flex-shrink:0;
+}
+.value-total{
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:2px solid rgba(201,168,76,.3);
+  margin-top:16px;padding-top:18px;
+}
+.val-total-label{
+  font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--white);
+}
+.val-total-prices{text-align:right}
+.val-old{font-size:14px;color:var(--silver);text-decoration:line-through}
+.val-new{
+  font-family:'Cinzel',serif;font-size:22px;font-weight:900;color:var(--gold);
+}
+
+/* ── PRICE BOX ── */
+.price-section{padding:80px 24px;text-align:center;background:var(--ink-mid)}
+.price-box{
+  max-width:500px;margin:48px auto 0;
+  background:var(--ink);
+  border:1px solid var(--gold);
+  border-radius:24px;padding:48px 40px;
+  position:relative;
+  box-shadow:0 0 100px rgba(201,168,76,.1),0 40px 80px rgba(0,0,0,.5);
+}
+.price-badge-top{
+  position:absolute;top:-17px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,var(--gold-dk),var(--gold));
+  color:var(--ink);font-family:'Cinzel',serif;font-size:11px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:7px 26px;border-radius:100px;white-space:nowrap;
+}
+.price-one-time{
+  font-size:13px;font-weight:600;color:var(--silver);
+  letter-spacing:1px;margin-bottom:12px;
+}
+.price-old{font-size:18px;color:var(--silver);text-decoration:line-through;margin-bottom:6px}
+.discount-pill{
+  display:inline-block;background:rgba(233,69,96,.12);color:var(--red);
+  font-size:13px;font-weight:700;padding:5px 14px;border-radius:100px;
+  margin-bottom:20px;border:1px solid rgba(233,69,96,.25);
+}
+.price-main{
+  display:flex;align-items:baseline;justify-content:center;gap:4px;margin-bottom:6px;
+}
+.price-cur{font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:var(--gold)}
+.price-val{font-family:'Cinzel',serif;font-size:88px;font-weight:900;color:var(--white);line-height:1}
+.price-cents{font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:var(--gold);align-self:flex-start;margin-top:16px}
+.price-note{font-size:13px;color:var(--silver);margin-bottom:32px}
+.price-includes{list-style:none;text-align:left;margin-bottom:32px;display:grid;gap:10px}
+.price-includes li{
+  display:flex;align-items:center;gap:10px;font-size:14px;color:var(--cream-dk);
+}
+.price-includes li::before{
+  content:'✓';width:20px;height:20px;border-radius:50%;
+  background:rgba(201,168,76,.15);color:var(--gold);
+  font-size:11px;font-weight:700;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;
+}
+
+/* ── BUTTONS ── */
+.btn-primary{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--gold-dk),var(--gold),var(--gold-lt));
+  color:var(--ink);font-family:'Cinzel',serif;font-size:14px;font-weight:700;
+  padding:20px 44px;border-radius:100px;text-decoration:none;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;
+  box-shadow:0 8px 40px rgba(201,168,76,.4);
+  transition:transform .2s,box-shadow .2s;
+  animation:pulse-glow 2.5s infinite;width:100%;text-align:center;
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(201,168,76,.5)}
+.btn-primary:active{transform:translateY(0)}
+@keyframes pulse-glow{
+  0%,100%{box-shadow:0 8px 40px rgba(201,168,76,.4)}
+  50%{box-shadow:0 8px 60px rgba(201,168,76,.65),0 0 30px rgba(201,168,76,.2)}
+}
+.decline-link{
+  display:block;text-align:center;margin-top:20px;
+  font-size:13px;color:var(--silver);cursor:pointer;
+  text-decoration:underline;text-underline-offset:3px;
+  opacity:.6;transition:opacity .2s;
+}
+.decline-link:hover{opacity:1}
+
+/* ── GUARANTEE ── */
+.guarantee{
+  display:flex;align-items:flex-start;gap:18px;
+  background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.18);
+  border-radius:var(--r);padding:24px;max-width:500px;margin:28px auto 0;
+  text-align:left;
+}
+.guarantee-icon{font-size:40px;flex-shrink:0}
+.guarantee h4{
+  font-family:'Cinzel',serif;font-size:14px;font-weight:600;
+  color:var(--white);margin-bottom:6px;
+}
+.guarantee p{font-size:13px;color:var(--silver);line-height:1.6}
+
+/* ── URGENCY NOTE ── */
+.urgency-note{
+  max-width:500px;margin:24px auto 0;
+  background:rgba(233,69,96,.06);
+  border:1px solid rgba(233,69,96,.15);
+  border-radius:var(--r-sm);padding:16px 20px;
+  text-align:center;
+}
+.urgency-note p{font-size:13px;color:var(--cream-dk);line-height:1.6}
+.urgency-note strong{color:var(--red)}
+
+/* ── FAQ ── */
+.faq-section{background:var(--ink);padding:72px 24px}
+.faq-wrap{max-width:660px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(201,168,76,.1);padding:24px 0}
+.faq-q{
+  font-family:'Cinzel',serif;font-size:15px;font-weight:600;color:var(--white);
+  cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  gap:16px;user-select:none;
+}
+.faq-q:hover{color:var(--gold-lt)}
+.faq-arrow{color:var(--gold);font-size:20px;transition:transform .3s;flex-shrink:0}
+.faq-a{font-size:14px;color:var(--silver);line-height:1.7;margin-top:14px;display:none}
+.faq-item.open .faq-arrow{transform:rotate(45deg)}
+.faq-item.open .faq-a{display:block}
+
+/* ── FINAL CTA SECTION ── */
+.final-cta{
+  padding:100px 24px;text-align:center;
+  background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(201,168,76,.07) 0%,transparent 70%),
+    linear-gradient(180deg,var(--ink-mid) 0%,var(--ink) 100%);
+}
+.final-inner{max-width:560px;margin:0 auto}
+
+/* ── FOOTER ── */
+footer{
+  background:#04080F;padding:28px 24px;text-align:center;
+  font-size:12px;color:var(--silver);
+  border-top:1px solid rgba(201,168,76,.07);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .price-val{font-size:68px}
+  .price-box{padding:40px 22px}
+  .guarantee{flex-direction:column}
+  .confirm-bar-inner{flex-direction:column;gap:6px}
+  .big-quote{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── CONFIRM BAR ── -->
+<div class="confirm-bar">
+  <div class="confirm-bar-inner">
+    <span class="confirm-icon">✅</span>
+    <span class="confirm-text">Seu acesso ao ebook foi confirmado — verifique seu e-mail</span>
+  </div>
+</div>
+
+<!-- ── TRANSITION HERO ── -->
+<section class="transition-hero">
+  <div class="congrats-badge">
+    <span>🎉</span>
+    <span>Parabéns — você acaba de tomar a decisão certa</span>
+  </div>
+  <h1>Antes de ir embora,<br>há uma última coisa importante que você precisa ver.</h1>
+  <div class="question-block reveal">
+    <p>E se você pudesse transformar cada capítulo do ebook em ação real — com exercícios, templates e um plano de 30 dias já montado para você?</p>
+  </div>
+</section>
+
+<!-- ── PROBLEMA ── -->
+<section class="problem-section">
+  <div class="problem-inner">
+    <div class="section-label reveal">O problema que ninguém fala</div>
+    <h2 class="section-title reveal">A maioria vai ler.<br>Poucos vão <span class="red">mudar</span>.</h2>
+    <p class="problem-text reveal">
+      Você vai ler o ebook. Vai sublinhar. Vai sentir que entendeu tudo.<br><br>
+      E vai fechar o arquivo.<br><br>
+      <strong>Três semanas depois, não mudou nada.</strong>
+    </p>
+    <div class="truth-box reveal">
+      <p>"Leitura sem prática estruturada não muda comportamento — muda percepção. E percepção sem ação não vale nada."</p>
+    </div>
+    <p class="problem-text reveal">
+      Não é falta de vontade. É falta de estrutura. Quando você fecha um livro bom, raramente há um sistema esperando para transformar aquela compreensão em hábito, em conversa real, em resultado concreto.<br><br>
+      <strong>Esse é exatamente o problema que o Workbook da Influência resolve.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ── SOLUTION INTRO ── -->
+<section class="solution-intro">
+  <div class="solution-inner reveal">
+    <p class="section-label">A solução</p>
+    <h2 class="workbook-title">Workbook da</h2>
+    <h2 class="workbook-title" style="color:var(--gold)">Influência</h2>
+    <p class="workbook-subtitle">Complemento oficial de Faça Pessoas Dizerem SIM</p>
+    <div class="gold-rule"></div>
+    <p class="solution-desc">
+      Para cada um dos 16 capítulos do ebook, você vai encontrar exercícios de reflexão, templates preenchíveis e frameworks prontos — para sair do modo leitura e entrar no modo prática. Mais um plano de 30 dias que diz exatamente o que fazer, um dia de cada vez.
+    </p>
+    <a href="#preco" class="btn-primary" style="max-width:420px;display:block;margin:0 auto;animation:none">Quero o Workbook — R$ 67 →</a>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="features-section">
+  <div class="features-inner">
+    <div style="text-align:center">
+      <p class="section-label reveal">O que está dentro</p>
+      <h2 class="section-title reveal">Quatro sistemas.<br>Um resultado: <span class="gold">você aplicando</span>.</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">✍️</div>
+        <div class="feature-tag">Exercício 1</div>
+        <div class="feature-title">Caixas de Reflexão por Capítulo</div>
+        <p class="feature-desc">Perguntas que forçam você a aplicar cada conceito na sua realidade específica — não na teoria. Com linhas para escrever e espaço para pensar de verdade.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">⚙️</div>
+        <div class="feature-tag">Exercício 2</div>
+        <div class="feature-title">Templates Preenchíveis</div>
+        <p class="feature-desc">Mapa de Persuasão, Checklist de Cialdini, Roteiro SPIN, Mapa de Objeções, Sequência de Fechamento, Sistema de Indicações — estruturas prontas para cada situação.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📌</div>
+        <div class="feature-tag">Exercício 3</div>
+        <div class="feature-title">Conceitos-Chave Condensados</div>
+        <p class="feature-desc">O essencial de cada capítulo numa caixa visual para consultar rapidamente antes de qualquer reunião, negociação ou conversa importante.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📅</div>
+        <div class="feature-tag">Exercício 4</div>
+        <div class="feature-title">Plano de Ação de 30 Dias</div>
+        <p class="feature-desc">30 ações diárias — uma por dia — organizadas por área. Você não precisa pensar no que praticar. Só abrir e executar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT'S INSIDE ── -->
+<section class="inside-section">
+  <div class="inside-inner">
+    <p class="section-label reveal">16 módulos, 16 capítulos</p>
+    <h2 class="section-title reveal">Um módulo de prática<br>para cada capítulo do ebook</h2>
+    <div class="modules-grid">
+      <div class="module-card reveal">
+        <div class="module-part">Parte I · Persuasão</div>
+        <div class="module-name">4 Módulos</div>
+        <ul class="module-items">
+          <li><span class="mod-dot">▸</span>Mapa Ethos-Pathos-Logos</li>
+          <li><span class="mod-dot">▸</span>Checklist dos 6 Gatilhos</li>
+          <li><span class="mod-dot">▸</span>Autoavaliação não-verbal</li>
+          <li><span class="mod-dot">▸</span>3 testes éticos aplicados</li>
+        </ul>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-part">Parte II · Comunicação</div>
+        <div class="module-name">4 Módulos</div>
+        <ul class="module-items">
+          <li><span class="mod-dot">▸</span>Template PREP completo</li>
+          <li><span class="mod-dot">▸</span>Diagnóstico de escuta</li>
+          <li><span class="mod-dot">▸</span>Template CNV (OFNP)</li>
+          <li><span class="mod-dot">▸</span>Banco de perguntas poderosas</li>
+        </ul>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-part">Parte III · Vendas</div>
+        <div class="module-name">4 Módulos</div>
+        <ul class="module-items">
+          <li><span class="mod-dot">▸</span>Roteiro SPIN preenchível</li>
+          <li><span class="mod-dot">▸</span>Mapa de objeções completo</li>
+          <li><span class="mod-dot">▸</span>Sequência de fechamento</li>
+          <li><span class="mod-dot">▸</span>Sistema de indicações</li>
+        </ul>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-part">Parte IV · Psicanálise</div>
+        <div class="module-name">4 Módulos</div>
+        <ul class="module-items">
+          <li><span class="mod-dot">▸</span>Mapeamento de padrões</li>
+          <li><span class="mod-dot">▸</span>Diário de defesas</li>
+          <li><span class="mod-dot">▸</span>Análise de repetição</li>
+          <li><span class="mod-dot">▸</span>Mapeamento de apego</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PLANO 30 DIAS ── -->
+<section class="plan-section">
+  <div class="plan-inner">
+    <p class="section-label reveal">O diferencial que nenhum ebook tem</p>
+    <h2 class="section-title reveal">30 dias. 30 ações.<br>Zero improviso.</h2>
+    <p style="font-size:17px;color:var(--cream-dk);max-width:560px;margin:0 auto" class="reveal">
+      O Plano de 30 Dias do Workbook diz exatamente o que praticar cada dia — eliminando a pergunta que paralisa a maioria: "por onde começo?"
+    </p>
+    <div class="plan-grid">
+      <div class="plan-week reveal">
+        <div class="week-label">Semana 1</div>
+        <div class="week-title">Persuasão</div>
+        <p class="week-desc">Mapeie suas crenças, ative os gatilhos, trate seu não-verbal e aplique os 3 testes éticos em situações reais.</p>
+      </div>
+      <div class="plan-week reveal">
+        <div class="week-label">Semana 2</div>
+        <div class="week-title">Comunicação</div>
+        <p class="week-desc">Estruture mensagens com PREP, pratique escuta nível 2, aplique CNV numa conversa difícil real.</p>
+      </div>
+      <div class="plan-week reveal">
+        <div class="week-label">Semana 3</div>
+        <div class="week-title">Vendas</div>
+        <p class="week-desc">Conduza uma conversa SPIN real, mapeie objeções, pratique silêncio no fechamento, peça uma indicação.</p>
+      </div>
+      <div class="plan-week reveal">
+        <div class="week-label">Semana 4</div>
+        <div class="week-title">Psicanálise + Consolidação</div>
+        <p class="week-desc">Identifique padrões, inicie diário de reflexão, escreva sua declaração pessoal de influência.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── QUOTE ── -->
+<section class="quote-section reveal">
+  <div class="big-quote">
+    <div class="gold-rule"></div>
+    <blockquote>"Você não sobe ao nível de seus objetivos. Você cai ao nível de seus sistemas."</blockquote>
+    <cite>— James Clear · Hábitos Atômicos (2018)</cite>
+  </div>
+</section>
+
+<!-- ── VALUE STACK ── -->
+<section class="value-section">
+  <div class="value-inner">
+    <p class="section-label reveal">O que você está recebendo</p>
+    <h2 class="section-title reveal">Tudo isso por um<br><span class="gold">único investimento</span></h2>
+    <div class="value-stack reveal">
+      <div class="value-row">
+        <div class="val-bullet">✍️</div>
+        <div>
+          <div class="val-name">16 módulos de reflexão por capítulo</div>
+          <div class="val-desc">Perguntas profundas que forçam aplicação real do conteúdo</div>
+        </div>
+        <div class="val-price">R$ 97</div>
+      </div>
+      <div class="value-row">
+        <div class="val-bullet">⚙️</div>
+        <div>
+          <div class="val-name">Templates preenchíveis</div>
+          <div class="val-desc">10 templates prontos para cada situação de persuasão e vendas</div>
+        </div>
+        <div class="val-price">R$ 67</div>
+      </div>
+      <div class="value-row">
+        <div class="val-bullet">📌</div>
+        <div>
+          <div class="val-name">Conceitos-chave condensados</div>
+          <div class="val-desc">Resumos visuais para consulta rápida antes de cada situação</div>
+        </div>
+        <div class="val-price">R$ 27</div>
+      </div>
+      <div class="value-row">
+        <div class="val-bullet">📅</div>
+        <div>
+          <div class="val-name">Plano de ação de 30 dias</div>
+          <div class="val-desc">30 ações diárias organizadas por área — zero improviso</div>
+        </div>
+        <div class="val-price">R$ 47</div>
+      </div>
+      <div class="value-total">
+        <div class="val-total-label">Valor total real</div>
+        <div class="val-total-prices">
+          <div class="val-old">R$ 238,00</div>
+          <div class="val-new">R$ 67 hoje</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICE ── -->
+<section class="price-section" id="preco">
+  <p class="section-label" style="text-align:center">Oferta exclusiva pós-compra</p>
+  <h2 class="section-title" style="text-align:center;max-width:520px;margin:0 auto">Disponível apenas<br><span class="gold">nesta página</span></h2>
+
+  <div class="price-box reveal">
+    <div class="price-badge-top">⚡ OFERTA EXCLUSIVA — SÓ AQUI</div>
+    <p class="price-one-time">Complemento oficial do ebook</p>
+    <div class="price-old">De R$ 127,00</div>
+    <div class="discount-pill">47% OFF — só para quem acabou de comprar</div>
+    <div class="price-main">
+      <span class="price-cur">R$</span>
+      <span class="price-val">67</span>
+      <span class="price-cents">,00</span>
+    </div>
+    <p class="price-note">Pagamento único · Acesso imediato · Download em PDF</p>
+    <ul class="price-includes">
+      <li>16 módulos de reflexão — um por capítulo</li>
+      <li>10 templates preenchíveis prontos para usar</li>
+      <li>Conceitos-chave condensados de cada capítulo</li>
+      <li>Plano de ação de 30 dias detalhado</li>
+      <li>Acesso vitalício + atualizações futuras</li>
+    </ul>
+    <button class="btn-primary" onclick="alert('Redirecionando para o checkout...')">
+      Sim — quero o Workbook por R$ 67 →
+    </button>
+    <p style="font-size:12px;color:var(--silver);margin-top:14px">🔒 Pagamento 100% seguro · Garantia de 7 dias</p>
+  </div>
+
+  <div class="guarantee reveal">
+    <div class="guarantee-icon">🛡️</div>
+    <div>
+      <h4>Garantia de 7 dias — igual ao ebook</h4>
+      <p>Se o Workbook não acelerar sua prática de forma perceptível, devolvo 100% do investimento. Sem perguntas, sem burocracia.</p>
+    </div>
+  </div>
+
+  <div class="urgency-note reveal">
+    <p>⚠️ <strong>Esta oferta existe apenas nesta página.</strong> Quando você sair, o Workbook volta ao preço normal de R$ 127 — sem desconto de cliente.</p>
+  </div>
+
+  <p class="decline-link" onclick="alert('Redirecionando para sua área de membros...')">
+    Não, obrigado. Prefiro seguir sem o Workbook e aplicar o ebook por conta própria.
+  </p>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq-section">
+  <div class="faq-wrap">
+    <p class="section-label" style="text-align:center">Dúvidas</p>
+    <h2 class="section-title" style="text-align:center;margin-bottom:40px">Perguntas <span class="gold">frequentes</span></h2>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Preciso ter lido o ebook antes de usar o Workbook?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">O ideal é usar os dois juntos — você lê o capítulo e já faz os exercícios correspondentes no Workbook. Mas você pode começar o Workbook primeiro para criar o hábito e depois preencher com o conteúdo do ebook.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">O Workbook é digital ou físico?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">É digital — entregue em PDF imediatamente após a confirmação. Mas foi formatado para impressão: você pode imprimir e usar com caneta, que é a experiência mais completa para os exercícios de reflexão.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">É só um PDF com espaços em branco?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Não. Cada módulo tem o conceito-chave do capítulo condensado, perguntas de reflexão específicas para aquele conteúdo, templates com campos de preenchimento estruturado, e orientações de uso. É um produto completo — não um caderno vazio.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Por que o preço aqui é menor do que o normal?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Porque você acabou de comprar o ebook e está no momento exato em que o Workbook faz mais sentido. Não faz sentido cobrar o preço cheio de quem acabou de demonstrar compromisso com o conteúdo.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Posso comprar o Workbook depois, fora desta página?<span class="faq-arrow">+</span></div>
+      <div class="faq-a">Sim — mas pelo preço normal de R$ 127. O desconto de 47% é exclusivo para clientes que estão nesta página logo após a compra do ebook.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="final-cta reveal">
+  <div class="final-inner">
+    <p class="section-label">Última chance</p>
+    <h2 class="section-title" style="margin-bottom:20px">
+      Você leu o suficiente<br>para saber se <span class="gold">faz sentido</span>.
+    </h2>
+    <p style="font-size:17px;color:var(--cream-dk);line-height:1.8;margin-bottom:44px">
+      O ebook te dá o conhecimento. O Workbook garante que esse conhecimento vira hábito. Um sem o outro funciona — mas os dois juntos é onde a mudança real acontece.
+    </p>
+    <button class="btn-primary" style="max-width:460px;display:block;margin:0 auto" onclick="document.getElementById('preco').scrollIntoView({behavior:'smooth'})">
+      Garantir meu Workbook por R$ 67 →
+    </button>
+    <p style="font-size:12px;color:var(--silver);margin-top:16px">
+      Garantia de 7 dias · Acesso imediato · Só nesta página
+    </p>
+    <p class="decline-link" style="margin-top:24px" onclick="alert('Redirecionando para sua área de membros...')">
+      Não, obrigado. Seguir sem o Workbook.
+    </p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold);margin-bottom:6px">Workbook da Influência</p>
+  <p>Complemento oficial de Faça Pessoas Dizerem SIM · © 2025</p>
+  <p style="margin-top:5px">Produto digital · Entrega imediata · Pagamento seguro</p>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in') });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+function toggleFaq(el){ el.parentElement.classList.toggle('open') }
+</script>
+</body>
+</html>
